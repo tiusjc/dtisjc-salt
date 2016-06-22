@@ -1,0 +1,13 @@
+- enc: ssh-rsa{% for user in pillar['users'] %}
+{{user.name}}:
+  user.present:
+    - fullname: {{ user.fullname }}
+    - shell: /bin/bash
+    - groups:
+      - adm
+  ssh_auth.present:
+    - user: {{ user.name }} 
+    - source: salt://users/keys/{{ user.name }}_id_rsa.pub
+    - require:
+      - user: {{ user.name }}
+{% endfor %} 

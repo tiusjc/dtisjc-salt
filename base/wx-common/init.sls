@@ -1,0 +1,2 @@
+wx-common:
+  pkg.installed
